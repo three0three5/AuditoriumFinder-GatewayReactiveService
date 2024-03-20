@@ -5,3 +5,7 @@ authURI: "http://localhost:8082"
 resourceURI: "http://localhost:8081"
 notificationsURI: "http://localhost:8083"
 certsURI: ${authURI}/auth/certs
+
+logging:
+  level:
+    root: trace

@@ -1,18 +1,17 @@
 package com.example.gatewayreactiveservice.config;
 
 import com.example.gatewayreactiveservice.filters.JwtAuthenticationFilter;
-import com.example.gatewayreactiveservice.filters.JwtFilter;
-import com.example.gatewayreactiveservice.security.JwtAuthenticationManager;
+import com.example.gatewayreactiveservice.filters.MorphHeadersFilter;
 import com.example.gatewayreactiveservice.security.JwtWebExchangeMatcher;
 import com.example.gatewayreactiveservice.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -24,24 +23,22 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(authorize -> authorize
-                        .pathMatchers("/auth/**").permitAll()
-                        .pathMatchers("/resource/moderator/*").authenticated()
-                        .pathMatchers("/resource/user/*").authenticated()
+                        //.pathMatchers("/resource/moderator/*").authenticated()
+                        .pathMatchers("/resource/user").authenticated()
+                        .anyExchange().permitAll()
                 )
                 .addFilterBefore(jwtFilter(), SecurityWebFiltersOrder.AUTHORIZATION)
+                .addFilterAfter(morphHeadersFilter(), SecurityWebFiltersOrder.AUTHORIZATION)
+                .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 .build();
     }
 
-    @Bean
-    public ReactiveAuthenticationManager reactiveAuthenticationManager() {
-        return new JwtAuthenticationManager(jwtService);
-    }
-
-    @Bean
-    public JwtAuthenticationFilter jwtFilter() {
+    private JwtAuthenticationFilter jwtFilter() {
         var matcher = new JwtWebExchangeMatcher();
-        return new JwtAuthenticationFilter(reactiveAuthenticationManager(), matcher);
+        return new JwtAuthenticationFilter(matcher, jwtService);
     }
 
-
+    private MorphHeadersFilter morphHeadersFilter() {
+        return new MorphHeadersFilter();
+    }
 }
