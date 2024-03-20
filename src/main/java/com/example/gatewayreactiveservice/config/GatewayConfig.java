@@ -13,9 +13,6 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Slf4j
 public class GatewayConfig {
-    private final GatewayFilter authenticateFilter;
-    private final GatewayFilter userAuthorized;
-
     @Value("${resourceURI}")
     private final String resourceURI;
 
@@ -31,16 +28,12 @@ public class GatewayConfig {
         return builder.routes()
                 .route(p -> p
                         .path("/notifications/ws")
-                        .filters(f -> f
-                                .filter(authenticateFilter))
                         .uri(notificationsURI))
                 .route(p -> p
                         .path("/auth/**")
                         .uri(authURI))
                 .route(p -> p
                         .path("/resource/**")
-                        .filters(f -> f
-                                .filter(userAuthorized))
                         .uri(resourceURI))
                 .route(p -> p
                         .path("/notifications/trigger/*")
