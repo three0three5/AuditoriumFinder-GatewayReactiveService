@@ -23,11 +23,12 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(authorize -> authorize
-                        //.pathMatchers("/resource/moderator/*").authenticated()
-                        .pathMatchers("/resource/user").authenticated()
+                        .pathMatchers("/resource/moderator/**").hasRole("MODERATOR")
+                        .pathMatchers("/resource/user/**").hasRole("USER")
+                        .pathMatchers("/notifications/ws").hasRole("USER")
                         .anyExchange().permitAll()
                 )
-                .addFilterBefore(jwtFilter(), SecurityWebFiltersOrder.AUTHORIZATION)
+                .addFilterAt(jwtFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
                 .addFilterAfter(morphHeadersFilter(), SecurityWebFiltersOrder.AUTHORIZATION)
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 .build();

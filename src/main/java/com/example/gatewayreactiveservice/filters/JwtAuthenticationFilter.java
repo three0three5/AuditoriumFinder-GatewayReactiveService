@@ -25,14 +25,21 @@ public class JwtAuthenticationFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         return this.matcher.matches(exchange)
-                .filter(ServerWebExchangeMatcher.MatchResult::isMatch)
-                .map((matchResult) -> matchResult.getVariables().get("token"))
+                .filter(matchResult -> {
+                    log.info("checking matching: " + matchResult.isMatch());
+                    return matchResult.isMatch();
+                })
+                .map((matchResult) -> {
+                    log.info("mapping matchResult");
+                    return matchResult.getVariables().get("token");
+                })
                 .switchIfEmpty(chain.filter(exchange).then(Mono.empty()))
                 .flatMap((token) -> authenticate((String) token))
                 .flatMap(authentication ->
                         chain.filter(exchange)
                                 .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication)))
                 .onErrorResume(JWTVerificationException.class, ex -> {
+                    log.info("JWTVerificationException");
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
                 })
