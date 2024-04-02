@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.security;
+package ru.orobtsovv.gatewayreactiveservice.security;
 
 public interface BasicPrincipal {
     String getUsername();

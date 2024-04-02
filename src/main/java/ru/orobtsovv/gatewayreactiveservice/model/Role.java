@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.model;
+package ru.orobtsovv.gatewayreactiveservice.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

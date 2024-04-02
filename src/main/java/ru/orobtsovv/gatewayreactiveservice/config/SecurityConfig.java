@@ -1,9 +1,9 @@
-package com.example.gatewayreactiveservice.config;
+package ru.orobtsovv.gatewayreactiveservice.config;
 
-import com.example.gatewayreactiveservice.filters.JwtAuthenticationFilter;
-import com.example.gatewayreactiveservice.filters.MorphHeadersFilter;
-import com.example.gatewayreactiveservice.security.JwtWebExchangeMatcher;
-import com.example.gatewayreactiveservice.service.JwtService;
+import ru.orobtsovv.gatewayreactiveservice.filters.JwtAuthenticationFilter;
+import ru.orobtsovv.gatewayreactiveservice.filters.MorphHeadersFilter;
+import ru.orobtsovv.gatewayreactiveservice.security.JwtWebExchangeMatcher;
+import ru.orobtsovv.gatewayreactiveservice.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ public class SecurityConfig {
                 )
                 .addFilterAt(jwtFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
                 .addFilterAfter(morphHeadersFilter(), SecurityWebFiltersOrder.AUTHORIZATION)
-                .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
+                .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // stateless
                 .build();
     }
 

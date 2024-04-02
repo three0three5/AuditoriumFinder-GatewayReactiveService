@@ -1,20 +1,20 @@
-package com.example.gatewayreactiveservice.service;
+package ru.orobtsovv.gatewayreactiveservice.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.gatewayreactiveservice.client.AuthClient;
-import com.example.gatewayreactiveservice.model.JwtBasicClaims;
-import com.example.gatewayreactiveservice.exception.CertsPublicKeyException;
-import com.example.gatewayreactiveservice.model.Role;
+import ru.orobtsovv.gatewayreactiveservice.client.AuthClient;
+import ru.orobtsovv.gatewayreactiveservice.model.JwtBasicClaims;
+import ru.orobtsovv.gatewayreactiveservice.exception.CertsPublicKeyException;
+import ru.orobtsovv.gatewayreactiveservice.model.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static com.example.gatewayreactiveservice.utils.ExceptionConstants.CERTS_UNAVAILABLE;
+import static ru.orobtsovv.gatewayreactiveservice.utils.ExceptionConstants.CERTS_UNAVAILABLE;
 
 @Service
 @RequiredArgsConstructor

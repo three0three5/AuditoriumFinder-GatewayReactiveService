@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.dto;
+package ru.orobtsovv.gatewayreactiveservice.dto;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.example.gatewayreactiveservice.client;
+package ru.orobtsovv.gatewayreactiveservice.client;
 
-import com.example.gatewayreactiveservice.dto.RsaPublicKeyResponse;
-import com.example.gatewayreactiveservice.exception.CertsPublicKeyException;
+import ru.orobtsovv.gatewayreactiveservice.dto.RsaPublicKeyResponse;
+import ru.orobtsovv.gatewayreactiveservice.exception.CertsPublicKeyException;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;

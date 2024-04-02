@@ -1,6 +1,6 @@
-package com.example.gatewayreactiveservice.model;
+package ru.orobtsovv.gatewayreactiveservice.model;
 
-import com.example.gatewayreactiveservice.security.BasicPrincipal;
+import ru.orobtsovv.gatewayreactiveservice.security.BasicPrincipal;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

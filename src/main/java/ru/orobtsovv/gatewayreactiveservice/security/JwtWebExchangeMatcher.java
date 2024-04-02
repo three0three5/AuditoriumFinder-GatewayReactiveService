@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.security;
+package ru.orobtsovv.gatewayreactiveservice.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;

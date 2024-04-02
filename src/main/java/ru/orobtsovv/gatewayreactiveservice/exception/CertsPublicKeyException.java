@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.exception;
+package ru.orobtsovv.gatewayreactiveservice.exception;
 
 public class CertsPublicKeyException extends RuntimeException {
     public CertsPublicKeyException(Exception e) {

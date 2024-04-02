@@ -1,4 +1,4 @@
-package com.example.gatewayreactiveservice.config;
+package ru.orobtsovv.gatewayreactiveservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

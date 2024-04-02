@@ -1,9 +1,9 @@
-package com.example.gatewayreactiveservice.filters;
+package ru.orobtsovv.gatewayreactiveservice.filters;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.gatewayreactiveservice.exception.CertsPublicKeyException;
-import com.example.gatewayreactiveservice.model.JwtBasicClaims;
-import com.example.gatewayreactiveservice.service.JwtService;
+import ru.orobtsovv.gatewayreactiveservice.exception.CertsPublicKeyException;
+import ru.orobtsovv.gatewayreactiveservice.model.JwtBasicClaims;
+import ru.orobtsovv.gatewayreactiveservice.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
