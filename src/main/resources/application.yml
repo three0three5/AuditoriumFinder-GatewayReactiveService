@@ -8,6 +8,22 @@ services:
   user: ${USER_SERVICE_URL:http://localhost:8084}
   certs-endpoint: ${services.auth}/certs
 
+spring:
+  jmx:
+    enabled: true
+
 logging:
   level:
     root: info
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway, health
