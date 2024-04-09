@@ -1,11 +1,13 @@
 server:
   port: 8080
 
-authURI: "http://localhost:8082"
-resourceURI: "http://localhost:8081"
-notificationsURI: "http://localhost:8083"
-certsURI: ${authURI}/auth/certs
+services:
+  auth: ${AUTH_SERVICE_URL:http://localhost:8082}/auth
+  aud: ${AUDITORIUM_SERVICE_URL:http://localhost:8081}
+  notifier: ${NOTIFICATION_SERVICE_URL:http://localhost:8083}/notifications
+  user: ${USER_SERVICE_URL:http://localhost:8084}
+  certs-endpoint: ${services.auth}/certs
 
 logging:
   level:
-    root: trace
+    root: info

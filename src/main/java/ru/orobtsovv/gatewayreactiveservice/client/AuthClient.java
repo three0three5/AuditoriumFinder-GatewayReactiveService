@@ -23,7 +23,7 @@ import java.util.Base64;
 public class AuthClient {
     private final WebClient webClient;
 
-    @Value("${certsURI}")
+    @Value("${services.certs-endpoint}")
     private String certsURI;
 
     public Mono<RSAPublicKey> getPublicSignatureKey() {

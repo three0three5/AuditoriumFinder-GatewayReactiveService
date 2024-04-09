@@ -12,31 +12,46 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Slf4j
 public class GatewayConfig {
-    @Value("${resourceURI}")
-    private final String resourceURI;
+    @Value("${services.auth}")
+    private final String authServiceUrl;
 
-    @Value("${authURI}")
-    private final String authURI;
+    @Value("${services.user}")
+    private final String userServiceUrl;
 
-    @Value("${notificationsURI}")
-    private final String notificationsURI;
+    @Value("${services.aud}")
+    private final String auditoriumServiceUrl;
+
+    @Value("${services.notifier}")
+    private final String notificationServiceUrl;
 
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         log.info("config");
         return builder.routes()
                 .route(p -> p
-                        .path("/notifications/ws")
-                        .uri(notificationsURI))
+                        .path("/notifications/**")
+                        .uri(notificationServiceUrl))
                 .route(p -> p
                         .path("/auth/**")
-                        .uri(authURI))
+                        .uri(authServiceUrl))
                 .route(p -> p
-                        .path("/resource/**")
-                        .uri(resourceURI))
+                        .path("/moderator/**")
+                        .uri(userServiceUrl))
                 .route(p -> p
-                        .path("/notifications/trigger/*")
-                        .uri(notificationsURI))
+                        .path("/requests/**")
+                        .uri(userServiceUrl))
+                .route(p -> p
+                        .path("/user/**")
+                        .uri(userServiceUrl))
+                .route(p -> p
+                        .path("/profile/**")
+                        .uri(userServiceUrl))
+                .route(p -> p
+                        .path("/tags/**")
+                        .uri(userServiceUrl))
+                .route(p -> p
+                        .path("/friends/**")
+                        .uri(userServiceUrl))
                 .build();
     }
 }
