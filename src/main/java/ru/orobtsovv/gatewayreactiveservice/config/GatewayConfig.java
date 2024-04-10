@@ -52,6 +52,12 @@ public class GatewayConfig {
                 .route(p -> p
                         .path("/friends/**")
                         .uri(userServiceUrl))
+                .route(p -> p
+                        .path("/building/**")
+                        .uri(auditoriumServiceUrl))
+                .route(p -> p
+                        .path("/auditorium/**")
+                        .uri(auditoriumServiceUrl))
                 .build();
     }
 }
