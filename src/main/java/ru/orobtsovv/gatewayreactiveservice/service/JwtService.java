@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 import static ru.orobtsovv.gatewayreactiveservice.utils.ExceptionConstants.CERTS_UNAVAILABLE;
+import static ru.orobtsovv.gatewayreactiveservice.utils.ExceptionConstants.ISSUER;
 
 @Service
 @RequiredArgsConstructor
@@ -28,19 +29,17 @@ public class JwtService {
                 .map(publicKey -> {
                     Algorithm algorithm = Algorithm.RSA256(publicKey);
                     JWTVerifier verifier = JWT.require(algorithm)
-                            .withIssuer("auth0")
+                            .withIssuer(ISSUER)
                             .build();
                     return verifier.verify(token);
                 });
     }
 
     public JwtBasicClaims getBasicClaims(DecodedJWT jwt) {
-        String username = jwt.getClaim("username").asString();
         int userid = jwt.getClaim("userid").asInt();
         List<Role> roles = jwt.getClaim("roles").asList(Role.class);
         return new JwtBasicClaims()
                 .setRoles(roles)
-                .setUsername(username)
                 .setUserid(userid);
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class JwtBasicClaims implements BasicPrincipal {
-    private String username;
     private int userid;
     private List<Role> roles;
 }
