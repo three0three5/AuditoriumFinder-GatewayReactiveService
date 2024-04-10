@@ -6,7 +6,7 @@ services:
   aud: ${AUDITORIUM_SERVICE_URL:http://localhost:8081}
   notifier: ${NOTIFICATION_SERVICE_URL:http://localhost:8083}
   user: ${USER_SERVICE_URL:http://localhost:8084}
-  certs-endpoint: ${services.auth}/certs
+  certs-endpoint: ${services.auth}/auth/certs
 
 spring:
   jmx:
