@@ -38,6 +38,8 @@ public class SecurityConfig {
                         .pathMatchers("/auth/signin/tg").hasRole("TG_SERVICE")
                         .pathMatchers("/auditorium/**").hasRole("USER")
                         .pathMatchers("/building/**").hasRole("USER")
+                        .pathMatchers("/auth/access/grantModerator").denyAll()
+                        .pathMatchers("/auth/access/grantTg").denyAll()
                         .anyExchange().permitAll()
                 )
                 .addFilterAt(jwtFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
