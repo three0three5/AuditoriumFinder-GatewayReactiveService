@@ -33,7 +33,6 @@ public class SecurityConfig {
                         .pathMatchers("/notifications/tg/ws").hasRole("TG_SERVICE")
                         .pathMatchers("/notifications/**").hasRole("USER")
                         .pathMatchers("/auth/banned/**").hasRole("MODERATOR")
-                        .pathMatchers("/auth/logout/**").hasRole("USER")
                         .pathMatchers("/auth/signup/tg").hasRole("TG_SERVICE")
                         .pathMatchers("/auth/signin/tg").hasRole("TG_SERVICE")
                         .pathMatchers("/auditorium/**").hasRole("USER")
